@@ -43,7 +43,10 @@ $car_troubles=$conn->query("SELECT c.*,t.trouble as ctrouble from car_troubles c
                                         } ?>
                                         </tbody>
                                     </table>
-                                   
+                                    <div class="col-12 text-right">
+                            <input type="button"class="btn btn-primary px-4" value="Geri" onclick="history.back(-1)" />
+
+                        </div>
                                 </div>
                          
                             </div>

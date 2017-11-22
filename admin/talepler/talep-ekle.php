@@ -142,6 +142,12 @@ else{
                     <div class="row">
                         <div class="col-6">
                             <button type="submit" class="btn btn-primary px-4">Ekle</button>
+
+
+                        </div>
+                        <div class="col-6 text-right">
+                            <input type="button"class="btn btn-primary px-4" value="Geri" onclick="history.back(-1)" />
+
                         </div>
                     </div>
 

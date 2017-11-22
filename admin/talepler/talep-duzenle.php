@@ -238,6 +238,10 @@ else{
                             <button type="submit" class="btn btn-primary px-4" <?php if($request['status']!=1 || $request['status']==2) {echo 'disabled title="Önce İşleme Alın veya Zaten İşleme Alınmış veya Talep Kapanmış."';}?>>Cevapla</button>
                             <button id="close" type="button"  class="btn btn-danger px-4" <?php if($request['status']==3) {echo 'disabled title="Zaten Kapatılmış"';}?>>Kapat</button>
                         </div>
+                        <div class="col-6 text-right">
+                            <input type="button"class="btn btn-primary px-4" value="Geri" onclick="history.back(-1)" />
+
+                        </div>
                     </div>
 
                 </form>

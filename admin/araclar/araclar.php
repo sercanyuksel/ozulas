@@ -31,9 +31,13 @@ $cars=$conn->query("SELECT c.*,a.code as acode from cars c INNER JOIN area a ON 
                                         <?php } ?>
                                         </tbody>
                                     </table>
-                                   
+                                    <div class="row">
+                        <div class="col-12 text-right">
+                            <input type="button"class="btn btn-primary px-4" value="Geri" onclick="history.back(-1)" />
+                        </div>
                                 </div>
-                         
+
+                    </div>
                             </div>
                             </div>
                     </div>
