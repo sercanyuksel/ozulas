@@ -37,7 +37,8 @@ $creators=$sth->fetchAll();
                                                 <th>Araç Kodu</th>
                                                 <th>Talebi Açan</th>
                                                 <th>Talebi Üstlenen</th>
-                                                <th>Talep Tarihi</th>
+                                                <th>Rapor Tarihi</th>
+                                                <th>Talebin Açıldığı Tarih</th>
                                                 <th>Durumu</th>
                                                 <th>İşlemler</th>
                                             </tr>
@@ -47,6 +48,8 @@ $creators=$sth->fetchAll();
                                            <?php foreach($requests as $request){
                                             $oDate = new DateTime($request['created_at']);
                                             $create_date = $oDate->format("d-m-Y");
+                                            $oDate2 = new DateTime($request['request_crtd_time']);
+                                            $create_date2 = $oDate2->format("d-m-Y");
                                             $sth=$conn->prepare("SELECT * from users WHERE id=?");
                                             $sth->execute(array($request['creator_id']));   
                                             $creator=$sth->fetch(PDO::FETCH_ASSOC);
@@ -83,6 +86,7 @@ $creators=$sth->fetchAll();
                                                 <td><?=$creator['name']?> <?=$creator['surname']?></td>
                                                 <td><?php if($exist){echo $handler['name'].' '.$handler['surname'];} else{echo 'Henüz Talep Üstlenilmedi.';}?></td>
                                                 <td><?=$create_date?></td>
+                                                <td><?=$create_date2?></td>
                                                 <td><?=$status?></td>
                                                 <td class="text-center"><a href="index.php?islem=talep-duzenle&id=<?=$request['id']?>" title="incele"><i class="icon-magnifier"></i></a>
                                                 <a onclick="return confirmation()" href="index.php?islem=talep-sil&id=<?=$request['id']?>" title="Sil"><i class="icon-trash"></i></a>

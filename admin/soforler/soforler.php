@@ -34,30 +34,13 @@ $drivers=$conn->query("SELECT * from drivers",PDO::FETCH_ASSOC);
                                                 <td><?=$driver['birthdate']?></td>
                                                 <td><?=$driver['phone']?></td>
                                                 <td><?=$driver['adress']?></td>
-                                                <td class="text-center"><a  href="index.php?islem=sofor-duzenle" title="incele"><i class="icon-magnifier"></i></a> | <a id="delete" href="index.php?islem=sofor-sil&id=<?=$driver['id']?>" title="Sil"><i class="icon-close"></i></a></td>
+                                                <td class="text-center"><a  href="index.php?islem=sofor-duzenle&id=<?=$driver['id']?>" title="incele"><i class="icon-magnifier"></i></a> | <a id="delete" href="index.php?islem=sofor-sil&id=<?=$driver['id']?>" title="Sil"><i class="icon-close"></i></a></td>
                                            </tr>
                                         <?php }}else{
                                            echo' Kayıt Bulunamadı.';
                                         } ?>
                                         </tbody>
                                     </table>
-                                    <nav>
-                                        <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" href="#">Prev</a>
-                                            </li>
-                                            <li class="page-item active">
-                                                <a class="page-link" href="#">1</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">4</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">Next</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
                                 </div>
                          
                             </div>

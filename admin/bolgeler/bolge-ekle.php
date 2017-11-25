@@ -5,14 +5,15 @@ if($_POST)
     
     $code=$_POST['code'];
     $name=$_POST['name'];
-    if(empty($code) || empty($name))
+    $name2=$_POST['name2'];
+    if(empty($code) || empty($name) || empty($name2))
     {
         echo '
       
         <div class="row justify-content-center">
         <div class="col-md-12">
         <div class="alert alert-danger" style="padding:60px;">
-        <h1><i class="fa fa-warning"></i>Bölge Kodu ve Bölge Bölümlerini Boş Bırakamazsanız.</h1><br/>
+        <h1><i class="fa fa-warning"></i>Bölge Kodu,Hat Kodu ve Hat Adı Bölümlerini Boş Bırakamazsanız.</h1><br/>
         Yönlendiriliyorsunuz...
         </div>
         </div>
@@ -23,9 +24,9 @@ if($_POST)
     }
     else
     {
-        $sth=$conn->prepare("INSERT INTO area (code,name) VALUES (?,?)");
+        $sth=$conn->prepare("INSERT INTO area (code,name,name2) VALUES (?,?,?)");
         $sth=$sth->execute(array(
-            $code,$name
+            $code,$name,$name2
         ));
         if($sth)
         {
@@ -81,15 +82,23 @@ else{
                 </div>
 
                 <div class="form-group">
-                    <label for="company">Bölge Adı :</label>
-                    <input type="text" name="name" class="form-control" id="area" placeholder="Bölge Adını Giriniz.">
+                    <label for="company">Hat Kodu :</label>
+                    <input type="text" name="name" class="form-control" id="area" placeholder="Hat Kodunu Giriniz.">
                 </div>
 
+                <div class="form-group">
+                    <label for="company">Hat Adı :</label>
+                    <input type="text" name="name2" class="form-control" id="area" placeholder="Hat Adını Giriniz.">
+                </div>
                 
 
                 <div class="row">
                     <div class="col-6">
                         <button type="submit" class="btn btn-primary px-4">Ekle</button>
+                    </div>
+                    <div class="col-6 text-right">
+                        <input type="button"class="btn btn-primary px-4" value="Geri" onclick="history.back(-1)" />
+
                     </div>
                 </div>
 
