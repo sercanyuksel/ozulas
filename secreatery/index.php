@@ -71,7 +71,7 @@ switch($page){
     case 'sofor-duzenle';
     include 'soforler/sofor-duzenle.php';
     break;
-
+    
     case 'evrak-ekle';
     include 'evraklar/evrak-ekle.php';
     break;

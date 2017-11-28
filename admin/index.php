@@ -189,9 +189,21 @@ switch($page){
     include 'ariza-tip/ariza-tip-duzenle.php';
     break;
 
+    case 'evrak-ekle';
+    include 'evraklar/evrak-ekle.php';
+    break;
+
+    case 'evraklar';
+    include 'evraklar/evraklar.php';
+    break;
+
     default;
     include 'talepler/talepler.php';
     break;
+
+
+
+
     }
 ?>    
         </main>
