@@ -145,6 +145,14 @@ switch($page){
     include 'talepler/talep-ekle.php';
     break;
 
+    case 'kullanici-ekle';
+    include 'users/kullanici-ekle.php';
+    break;
+    
+    case 'kullanicilar';
+    include 'users/kullanicilar.php';
+    break;
+
     case 'arsiv';
     include 'talepler/arsiv.php';
     break;

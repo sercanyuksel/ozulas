@@ -6,6 +6,19 @@ $( "#car_id" ).change(function() {
         });
 });
 
+$("#cancel").click(function(e){
+    var id=$("#req_id").val();
+    var variables='id='+id;
+    $.post("../admin/ajax/cancel_request.php",
+    {
+        id: id
+    },
+    function(data){
+        alert(data);
+        window.location.href='index.php?islem=talepler';
+    });
+});
+
 $("#handle").click(function(e){
     var id=$("#req_id").val();
     var sid=$('#ses_id').val();

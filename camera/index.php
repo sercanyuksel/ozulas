@@ -3,7 +3,10 @@
  header("content-type: text/html; charset=utf-8");
  require('include/ayar.php');
  session_start();
-
+ $success_request_count=$conn->prepare("SELECT * from requests WHERE status=2 AND response_status=1 ");
+ $success_request_count->execute();
+ $unsuccess_request_count=$conn->prepare("SELECT * from requests WHERE status=2 AND response_status=0 ");
+ $unsuccess_request_count->execute();
 if(!$_SESSION['user']||$_SESSION['authority']!=4)
 {
     header('Location:../');
@@ -13,8 +16,9 @@ if(!$_SESSION['user']||$_SESSION['authority']!=4)
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
    <?php include('include/navbar.php'); ?>
-
+   
     <div class="app-body">
+      
       <?php $page=@$_GET['islem']; 
         switch(substr($page,0,3))
         {
@@ -40,7 +44,15 @@ if(!$_SESSION['user']||$_SESSION['authority']!=4)
             <ol class="breadcrumb">
                 <li style="margin-top:10px;" class="breadcrumb-item"><?=$active?></li>
             </ol>
-
+            <div class="col-sm-12 text-right" style="margin:2px;">
+            <div class="container-fluid">
+            <div class="row">
+            <div class="badge-warning col-sm-12" ><b>Alınan Kayıt Sayısı :<?=$success_request_count->rowCount()+$unsuccess_request_count->rowCount()?></b> ||
+            <span>Olumlu Talep Sayısı : </span><b class="badge-success"><?=$success_request_count->rowCount()?></b> | Olumsuz Talep Sayısı: <b class="badge-danger"><?=$unsuccess_request_count->rowCount()?></b>
+            </div>
+            </div>
+            </div>
+             </div>
             <?php
 
 switch($page){

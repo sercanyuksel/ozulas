@@ -210,7 +210,8 @@ else{
                     <input type="hidden"  value="<?=$request['car_id']?>" id="car_id"/>   
                     <div class="row">
                         <div class="col-6">
-                            <button  type="submit"  class="btn btn-danger px-4"?>>Düzenle</button>
+                            <button  type="submit"  class="btn btn-danger px-4">Düzenle</button>
+                            <button  type="button"  id="send_back" class="btn btn-warning px-4">Geri Gönder</button>
                         </div>
                     </div>
 

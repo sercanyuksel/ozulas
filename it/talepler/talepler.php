@@ -1,5 +1,5 @@
 <?php
-$sth=$conn->prepare("SELECT * from requests WHERE status=0 OR status=1 OR status=2 ORDER BY created_at ASC");
+$sth=$conn->prepare("SELECT * from requests WHERE status=0 OR status=1 OR status=2 OR status=20 ORDER BY created_at ASC");
 $sth->execute();
 $requests=$sth->fetchAll();
 $sth=$conn->prepare("SELECT * from users WHERE type_id=3 OR type_id=1");
@@ -74,6 +74,10 @@ $creators=$sth->fetchAll();
                                             if($request['status']==3){
                                                 $status='Kapalı';
                                                 $color="";
+                                            }
+                                            if($request['status']==20){
+                                                $status='Düzenleme Bekleniyor.';
+                                                $color="badge-light";
                                             }
                                             ?>
                                                  <tr class="<?=$color?>">

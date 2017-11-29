@@ -3,6 +3,7 @@ $id=$_GET['id'];
 $sth=$conn->prepare("SELECT * from requests WHERE id=?");
 $sth->execute(array($id));
 $request=$sth->fetch(PDO::FETCH_ASSOC);
+$current_status=$request['status'];
 $sth=$conn->prepare("SELECT * from cars");
 $sth->execute();
 $cars=$sth->fetchAll(PDO::FETCH_ASSOC);
@@ -43,13 +44,16 @@ if($request['status']==2){
 if($request['status']==3){
     $cur_status="Kapalı Talep";
 }
+if($request['status']==20){
+    $cur_status="Düzenleme Bekliyor";
+}
 $sth=$conn->prepare("SELECT * from car_camera WHERE car_id=?");
 $sth->execute(array($request['car_id']));
 $car_cameras=$sth->fetchAll(PDO::FETCH_ASSOC);
 if($_POST)
 {
    
-    
+
         $id=$_POST['req_id'];
         $s_time=$_POST['s_time'];
         $e_time=$_POST['e_time'];
@@ -60,11 +64,18 @@ if($_POST)
             $camera_id=$camera_id.'-'.$cam;
         }
         $camera_id=substr($camera_id,1);
-        
+        if($current_status!=20){
         $sth=$conn->prepare("UPDATE requests SET start_time=?,stop_time=?,description=?,car_id=?,camera_id=?  WHERE id=?"); 
         $sth=$sth->execute(array(
             $s_time,$e_time,$desc,$car_id,$camera_id,$id
         ));
+        }
+        else{
+            $sth=$conn->prepare("UPDATE requests SET status=?,start_time=?,stop_time=?,description=?,car_id=?,camera_id=?  WHERE id=?"); 
+            $sth=$sth->execute(array(
+                0,$s_time,$e_time,$desc,$car_id,$camera_id,$id
+            ));
+        }
         if($sth)
         {
             echo '
@@ -217,6 +228,7 @@ else{
                     <div class="row">
                         <div class="col-6">
                             <button  type="submit"  class="btn btn-danger px-4">Düzenle</button>
+                            <button  type="button" id="cancel" class="btn btn-warning px-4">Geri Çek</button>
                         </div>
                     </div>
 

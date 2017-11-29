@@ -5,7 +5,19 @@ $( "#car_id" ).change(function() {
             $( ".form-group" ).eq(1).after( data);
         });
 });
-
+$("#send_back").click(function(e){
+    var id=$("#req_id").val();
+    
+    var variables='id='+id
+    $.post("../admin/ajax/sendback_request.php",
+    {
+        id: id
+    },
+    function(data){
+        alert(data);
+        window.location.href='index.php?islem=talepler';
+    });
+});
 $("#handle").click(function(e){
     var id=$("#req_id").val();
     var sid=$('#ses_id').val();
@@ -24,7 +36,7 @@ $("#close").click(function(e){
     var id=$("#req_id").val();
     var sid=$('#ses_id').val();
     var variables='id='+id+',sid='+sid;
-    $.post("ajax/end_request.php",
+    $.post("ajax/close_request.php",
     {
         id: id,
         sid: sid
