@@ -3,30 +3,29 @@
 if($_POST)
 {
     
-    $code=$_POST['code'];
-    $name=$_POST['name'];
-    $name2=$_POST['name2'];
-    if(empty($code) || empty($name) || empty($name2))
+    $brand=$_POST['brand'];
+   
+    if(empty($brand))
     {
         echo '
       
         <div class="row justify-content-center">
         <div class="col-md-12">
         <div class="alert alert-danger" style="padding:60px;">
-        <h1><i class="fa fa-warning"></i>Bölge Kodu,Hat Kodu ve Hat Adı Bölümlerini Boş Bırakamazsanız.</h1><br/>
+        <h1><i class="fa fa-warning"></i>Marka Adını Boş Bırakamazsanız.</h1><br/>
         Yönlendiriliyorsunuz...
         </div>
         </div>
         </div>
         	
         ';
-     header("Refresh:2; url=index.php?islem=bolge-ekle");
+     header("Refresh:2; url=index.php?islem=marka-ekle");
     }
     else
     {
-        $sth=$conn->prepare("INSERT INTO area (code,name,name2) VALUES (?,?,?)");
+        $sth=$conn->prepare("INSERT INTO brand (brand) VALUES (?)");
         $sth=$sth->execute(array(
-            $code,$name,$name2
+            $brand
         ));
         if($sth)
         {
@@ -35,14 +34,14 @@ if($_POST)
               <div class="row justify-content-center">
               <div class="col-md-12">
               <div class="alert alert-success" style="padding:60px;">
-              <h1><i class="fa fa-check-circle-o"></i> Bölge Ekleme Başarılı .</h1><br/>
+              <h1><i class="fa fa-check-circle-o"></i> Marka Ekleme Başarılı .</h1><br/>
               Yönlendiriliyorsunuz...
               </div>
               </div>
               </div>
                   
               ';
-           header("Refresh:2; url=index.php?islem=bolgeler");
+           header("Refresh:2; url=index.php?islem=markalar");
         }
         else
         {
@@ -58,7 +57,7 @@ if($_POST)
               </div>
                   
               ';
-           header("Refresh:2; url=index.php?islem=bolge-ekle");
+           header("Refresh:2; url=index.php?islem=marka-ekle");
         }
     }
     
@@ -71,35 +70,25 @@ else{
 
             <div class="card">
                 <div class="card-header">
-                    <strong>Bölge Ekle</strong>                
+                    <strong>Marka Ekle</strong>                
                 </div>
                 <div class="card-body">
                 <form method="POST">
                    
                 <div class="form-group">
-                    <label for="company">Bölge Kodu :</label>
-                    <input type="text" name="code" class="form-control" id="code" placeholder="Bölge Kodunu Giriniz.">
+                    <label for="company">Marka Adı :</label>
+                    <input type="text" name="brand" class="form-control" id="brand" placeholder="Marka Adını Giriniz.">
                 </div>
 
-                <div class="form-group">
-                    <label for="company">Hat Kodu :</label>
-                    <input type="text" name="name" class="form-control" id="area" placeholder="Hat Kodunu Giriniz.">
-                </div>
-
-                <div class="form-group">
-                    <label for="company">Hat Adı :</label>
-                    <input type="text" name="name2" class="form-control" id="area" placeholder="Hat Adını Giriniz.">
-                </div>
-                
-
+             
                 <div class="row">
                     <div class="col-6">
                         <button type="submit" class="btn btn-primary px-4">Ekle</button>
                     </div>
                     <div class="col-6 text-right">
-                        <input type="button"class="btn btn-primary px-4" value="Geri" onclick="history.back(-1)" />
+                            <input type="button"class="btn btn-primary px-4" value="Geri" onclick="history.back(-1)" />
 
-                    </div>
+                        </div>
                 </div>
 
                 </form>

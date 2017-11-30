@@ -30,7 +30,6 @@
                     <div class="dropdown-header text-center">
                         <strong>Hesap</strong>
                     </div>
-                    <a class="dropdown-item" href="index.php?islem=kullanici-ekle"><i class="fa fa-user"></i> Kullanıcı Ekle</a>
                     <a class="dropdown-item" href="index.php?islem=sifre-degistir"><i class="fa fa-wrench"></i> Şifre Değiştir</a>
                     <a class="dropdown-item" href="index.php?islem=cikis"><i class="fa fa-lock"></i> Çıkış Yap</a>
                 </div>

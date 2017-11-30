@@ -94,3 +94,13 @@ function myFunction() {
         }
     }
 });
+var rows = $('#araclar > tbody').children('tr').get(); // creates a JS array of DOM elements
+rows.sort(function(a, b) {  // use a custom sort function
+    console.log(parseInt($(a).find("td").eq(0).text().substr(1)));
+    var anum = parseInt($(a).find("td").eq(0).text().substr(1), 10);
+    var bnum = parseInt($(b).find("td").eq(0).text().substr(1), 10);
+    return bnum-anum;
+});
+for (var i = 0; i < rows.length; i++) {  // .append() will move them for you
+    $('#araclar > tbody').append(rows[i]);
+}

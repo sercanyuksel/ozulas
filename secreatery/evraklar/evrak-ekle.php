@@ -9,7 +9,7 @@ if($_POST)
     $file_loc = $_FILES['file']['tmp_name'];
     $file_type = $_FILES['file']['type'];
     $file_size = $_FILES['file']['size'];
-    $folder="C:/xampp/uploads/";
+    $folder="C:/xampp/htdocs/uploads/";
     $id =$_POST['id'];
     $sending=$_POST['sending'];
     $date=$_POST['date'];

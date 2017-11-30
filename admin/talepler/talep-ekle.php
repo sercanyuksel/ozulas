@@ -2,10 +2,15 @@
 $sth=$conn->prepare("SELECT * from cars");
 $sth->execute();
 $cars=$sth->fetchAll();
+$sth=$conn->prepare("SELECT * from cars");
+$sth->execute();
+$cars2=$sth->fetchAll();
 if($_POST)
 {
     $dt=new DateTime($_POST['tarih']);
     $created_at = $dt->format('Y-m-d');
+    $dt1=new DateTime();
+    $open_at = $dt1->format('Y-m-d H:i:s');
     $desc=$_POST['desc'];
     $car_id=$_POST['car_id'];
     $creator_id=$_SESSION['user_id'];
@@ -53,9 +58,9 @@ if($_POST)
     }
     else
     {
-        $sth=$conn->prepare("INSERT INTO requests (talep_no,car_id,description,created_at,creator_id,status,camera_id,start_time,stop_time) VALUES (?,?,?,?,?,?,?,?,?)");
+        $sth=$conn->prepare("INSERT INTO requests (talep_no,car_id,description,created_at,creator_id,status,camera_id,start_time,stop_time,request_crtd_time) VALUES (?,?,?,?,?,?,?,?,?,?)");
         $sth=$sth->execute(array(
-            $talep_no,$car_id,$desc,$created_at,$creator_id,0,$camera_id,$start_time,$stop_time
+            $talep_no,$car_id,$desc,$created_at,$creator_id,0,$camera_id,$start_time,$stop_time,$open_at
         ));
         if($sth)
         {
@@ -116,6 +121,7 @@ else{
                         <option value="-1" disabled selected="selected">Araç Seçin</option>
                         <?php foreach($cars as $car) { ?>
                             <option value="<?=$car['id']?>"><?=$car['code']?></option>
+
                         <?php } ?>                        
                         </select><br/>
                         <input type="text" style="width:20%;" class="form-control" id="filterCar" placeholder="Araç Filtrele"></input>
@@ -158,6 +164,9 @@ else{
         </div>
     </div>
 </div>
+<script>
+var options=
+</script>
 <script type="text/javascript" src="talepler/handle.js"></script>
 <?php }
 ?>

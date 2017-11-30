@@ -4,8 +4,10 @@ $sth->execute();
 $cars=$sth->fetchAll();
 if($_POST)
 {
-    $dt=new DateTime();
-    $created_at = $dt->format('Y-m-d H:i:s');
+    $dt=new DateTime($_POST['tarih']);
+    $created_at = $dt->format('Y-m-d');
+    $dt1=new DateTime();
+    $open_at = $dt1->format('Y-m-d H:i:s');
     $desc=$_POST['desc'];
     $car_id=$_POST['car_id'];
     $creator_id=$_SESSION['user_id'];
@@ -35,9 +37,9 @@ if($_POST)
     }
     else
     {
-        $sth=$conn->prepare("INSERT INTO requests (talep_no,car_id,description,created_at,creator_id,status,camera_id,start_time,stop_time) VALUES (?,?,?,?,?,?,?,?,?)");
+        $sth=$conn->prepare("INSERT INTO requests (talep_no,car_id,description,created_at,creator_id,status,camera_id,start_time,stop_time,request_crtd_time) VALUES (?,?,?,?,?,?,?,?,?,?)");
         $sth=$sth->execute(array(
-            $talep_no,$car_id,$desc,$created_at,$creator_id,0,$camera_id,$start_time,$stop_time
+            $talep_no,$car_id,$desc,$created_at,$creator_id,0,$camera_id,$start_time,$stop_time,$open_at
         ));
         if($sth)
         {

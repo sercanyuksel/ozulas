@@ -21,12 +21,7 @@
                     <span class="d-md-down-none"><?=$_SESSION['user_id']?></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <div class="dropdown-header text-center">
-                        <strong>Hesap</strong>
-                    </div>
-                    <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Mesajlar<span class="badge badge-success">42</span></a>
-                    <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Talepler<span class="badge badge-danger">42</span></a>
-                    <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Arızalar<span class="badge badge-warning">42</span></a>
+               
                     <div class="dropdown-header text-center">
                         <strong>Ayarlar</strong>
                     </div>

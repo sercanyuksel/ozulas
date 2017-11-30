@@ -29,7 +29,7 @@ $documents=$conn->query("SELECT * FROM documents",PDO::FETCH_ASSOC);
                                                 <td><?=$document['date']?></td>
                                                 <td><?=$document['subject']?></td>
                                                 <td><?=$document['file_no']?></td>
-                                                <td><a href="C:/xampp/uploads/<?=$document['file']?>" download><?=$document['file']?></a></td>
+                                                <td><a href="C:/xampp/htdocs/uploads/<?=$document['file']?>" download><?=$document['file']?></a></td>
                                            </tr>
                                         <?php } ?>
                                         </tbody>

@@ -42,6 +42,17 @@
                         </ul>
                     </li>
                     <li class="nav-item nav-dropdown">
+                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Kullanıcı İşlemleri</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?islem=kullanici-ekle"><i class="icon-star"></i>Kullanıcı Ekle</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?islem=kullanicilar"><i class="icon-star"></i>Kullanıcılar</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-dropdown">
                     <a class="nav-link" href="#"><i class="icon-star"></i> Akbil Arızaları</a>
                         
                     </li>
