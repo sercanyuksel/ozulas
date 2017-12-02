@@ -1,10 +1,3 @@
-$( "#car_id" ).change(function() {
-    $('#dynamicInput').remove();
-    var deger=$("#car_id").val();
-    $.get("ajax/fetch_car_camera.php?id="+deger, function( data ) {
-            $( ".form-group" ).eq(1).after( data);
-        });
-});
 
 $("#handle").click(function(e){
     var id=$("#req_id").val();
@@ -33,20 +26,6 @@ $("#close").click(function(e){
         alert(data);
         window.location.href='index.php?islem=talepler';
     });
-});
-$("#filterCar").keyup(function () {
-    var valthis = $(this).val().toLowerCase();
-
-    $("select#car_id>option").each(function () {
-        var text = $(this).text().toLowerCase();
-        if (text.indexOf(valthis) !== -1) {
-            $(this).show(); $(this).prop("selected",true);
-        }
-        else {
-            $(this).hide();
-        }
-    });
-    $( "#car_id" ).change();
 });
 function myFunction() {
     // Declare variables 
@@ -82,31 +61,30 @@ function myFunction() {
      
     }
   }
-  $( "#filter_creator" ).change(function() {
+$( "#filter_creator" ).change(function() {
     var deger=$("#filter_creator").val();
     var input, filter, table, tr, td, i;
     filter = deger.toUpperCase();
-    table = document.getElementById("talepler");
+    table = document.getElementById("kazalar");
     tr = table.getElementsByTagName("tr");
   
     // Loop through all table rows, and hide those who don't match the search query
     if(filter!="ALL"){
-    for (i = 1; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[2];
-      if (td) {
-        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-          tr[i].style.display = "";
-        } else {
-          tr[i].style.display = "none";
-        }
-      } 
+        for (i = 1; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[7];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+            }
+         } 
     }
-    }
-    else{
+}else{
         for (i = 1; i < tr.length; i++) {
             tr[i].style.display="";
         }
-    }
+}
 });
 function confirmation() {
     return confirm('Talep Silinecek!Emin Misiniz?');

@@ -251,6 +251,6 @@ else{
         </div>
     </div>
 </div>
-<script type="text/javascript" src="talepler/handle.js"></script>
+<script type="text/javascript" src="kazalar/handle.js"></script>
 <?php }
 ?>

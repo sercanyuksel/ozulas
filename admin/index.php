@@ -209,19 +209,19 @@ switch($page){
     include 'kazalar/kazalar.php';
     break;
 
-    case 'kazalar';
+    case 'kaza-detay';
     include 'kazalar/kaza-detay.php';
     break;
 
-    case 'kazalar';
+    case 'kaza-duzenle';
     include 'kazalar/kaza-duzenle.php';
     break;
 
-    case 'kazalar';
+    case 'kaza-ekle';
     include 'kazalar/kaza-ekle.php';
     break;
 
-    case 'kazalar';
+    case 'kaza-sil';
     include 'kazalar/kaza-sil.php';
     break;
 

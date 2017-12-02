@@ -2,45 +2,30 @@
 $sth=$conn->prepare("SELECT * from cars");
 $sth->execute();
 $cars=$sth->fetchAll();
-$sth=$conn->prepare("SELECT * from cars");
-$sth->execute();
-$cars2=$sth->fetchAll();
+
+$sth1=$conn->prepare("SELECT * from drivers");
+$sth1->execute();
+$drivers=$sth1->fetchAll();
 if($_POST)
 {
     $dt=new DateTime($_POST['tarih']);
     $created_at = $dt->format('Y-m-d');
-    $dt1=new DateTime();
-    $open_at = $dt1->format('Y-m-d H:i:s');
-    $desc=$_POST['desc'];
+    $description=$_POST['description'];
     $car_id=$_POST['car_id'];
     $creator_id=$_SESSION['user_id'];
-    $camera_id="";
-    $talep_no=$_POST['talep_no'];
-    $sth=$conn->prepare("SELECT * from requests WHERE talep_no=?");
-    $sth->execute(array($talep_no));
-    if($sth->rowCount()>0){
-        echo '
-        
-          <div class="row justify-content-center">
-          <div class="col-md-12">
-          <div class="alert alert-danger" style="padding:60px;">
-          <h1><i class="fa fa-warning"></i> Bu Talep Numarası İçin Kayıt Zaten Oluşturulmuş.</h1><br/>
-          Yönlendiriliyorsunuz...
-          </div>
-          </div>
-          </div>
-              
-          ';
-       header("Refresh:2; url=index.php?islem=talep-ekle");
-    }
-    else{
-    foreach($_POST['camera'] as $cam){
-        $camera_id=$camera_id.'-'.$cam;
-    }
-    $camera_id=substr($camera_id,1);
-    $start_time=$_POST['start_time'];
-    $stop_time=$_POST['stop_time'];
-    if(empty($desc) || empty($car_id))
+    $driver_id=$_POST['driver_id'];
+    $kaza_yeri=$_POST['kaza_yeri'];
+    $kaza_arac=$_POST['kaza_arac'];
+    $kaza_durumu=$_POST['kaza_durumu'];
+
+    $file_name = $_FILES['file']['name'];
+    $file_loc = $_FILES['file']['tmp_name'];
+    $file_type = $_FILES['file']['type'];
+    $file_size = $_FILES['file']['size'];
+    $folder="C:/xampp/uploads/";
+
+
+    if(empty($description) || empty($car_id))
     {
         echo '
       
@@ -54,13 +39,14 @@ if($_POST)
         </div>
         	
         ';
-     header("Refresh:2; url=index.php?islem=talep-ekle");
+     header("Refresh:2; url=index.php?islem=kaza-ekle");
     }
     else
     {
-        $sth=$conn->prepare("INSERT INTO requests (talep_no,car_id,description,created_at,creator_id,status,camera_id,start_time,stop_time,request_crtd_time) VALUES (?,?,?,?,?,?,?,?,?,?)");
+        move_uploaded_file($file_loc,$folder.$file_name);
+        $sth=$conn->prepare("INSERT INTO accidents (car_id,description,creator_id,driver_id,kaza_yeri,kaza_arac,kaza_durumu,file_name,file_type,file_size,tarih) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
         $sth=$sth->execute(array(
-            $talep_no,$car_id,$desc,$created_at,$creator_id,0,$camera_id,$start_time,$stop_time,$open_at
+            $car_id,$description,$creator_id,$driver_id,$kaza_yeri,$kaza_arac,$kaza_durumu,$file_name ,$file_type,$file_size,$created_at
         ));
         if($sth)
         {
@@ -69,14 +55,14 @@ if($_POST)
               <div class="row justify-content-center">
               <div class="col-md-12">
               <div class="alert alert-success" style="padding:60px;">
-              <h1><i class="fa fa-check-circle-o"></i> Talep Ekleme Başarılı .</h1><br/>
+              <h1><i class="fa fa-check-circle-o"></i> Kaza Ekleme Başarılı .</h1><br/>
               Yönlendiriliyorsunuz...
               </div>
               </div>
               </div>
                   
               ';
-           header("Refresh:2; url=index.php?islem=talepler");
+           header("Refresh:2; url=index.php?islem=kazalar");
         }
         else
         {
@@ -92,10 +78,9 @@ if($_POST)
               </div>
                   
               ';
-           header("Refresh:2; url=index.php?islem=talep-ekle");
+           header("Refresh:2; url=index.php?islem=kaza-ekle");
         }
     }
-}
 }
 else{
 ?>
@@ -105,15 +90,10 @@ else{
 
             <div class="card">
                 <div class="card-header">
-                    <strong>Talep Ekle</strong>                
+                    <strong>Kaza Ekle</strong>                
                 </div>
                 <div class="card-body">
-                <form method="POST">
-                   
-                    <div class="form-group">
-                        <label for="desc">Talep No :</label>
-                        <input type="text" name="talep_no"  class="form-control" id="desc"></input>
-                    </div>
+                <form method="POST" enctype="multipart/form-data">
 
                     <div class="form-group">
                         <label for="company">Araç Kodu:</label>
@@ -124,25 +104,46 @@ else{
 
                         <?php } ?>                        
                         </select><br/>
-                        <input type="text" style="width:20%;" class="form-control" id="filterCar" placeholder="Araç Filtrele"></input>
                     </div>
                     <div class="form-group">
+                        <label for="company">Kaza Durumu Seçin:</label>
+                        <select class="form-control" name="kaza_durumu" id="kaza_durumu">
+                        <option value="-1" disabled selected="selected">Kaza Durumu Seçin</option>
+                        <option value="Yaralamalı">Yaralamalı</option>
+                        <option value="Maddi Hasarlı">Maddi Hasarlı</option> 
+                        <option value="Ölümlü">Ölümlü</option>       
+                        </select><br/>
+                    </div>
+                    <div class="form-group">
+                        <label for="desc"> Kaza Yapılan Araç Plaka:</label>
+                        <input type="text" name="kaza_arac"  class="form-control" id="desc" placeholder="Plakayı Girin."></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="desc"> Kaza Yeri:</label>
+                        <input type="text" name="kaza_yeri"  class="form-control" id="desc" placeholder="Kaza Yapılan Yeri Girin."></input>
+                    </div>
+                    <div class="form-group">
+                    <div class="form-group">
+                        <label for="company">Araç Kodu:</label>
+                        <select class="form-control" name="driver_id" id="driver_id">
+                        <option value="-1" disabled selected="selected">Şoför Seçin</option>
+                        <?php foreach($drivers as $driver) { ?>
+                            <option value="<?=$driver['id']?>"><?=$driver['name']?><?=$driver['surname']?></option>
+
+                        <?php } ?>                        
+                        </select><br/>
+                    </div>
                         <label for="desc">Tarih :</label>
                         <input style="width:25%" type="date" name="tarih"  class="form-control" id="desc"></input>
                     </div>
-                    <div class="form-group">
-                        <label for="desc">Başlangıç Zamanı :</label>
-                        <input type="time" name="start_time"  class="form-control" id="desc"></input>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="desc">Bitiş Zamanı :</label>
-                        <input type="time" name="stop_time"  class="form-control" id="desc"></input>
-                    </div>
-
+                    <div class="form-group" >
+                     <label for="company">Resim Ekle :</label>
+                     <input type="file" name="file" class="form-control" enctype="multipart/form-data"/>
+                     
+                </div> 
                     <div class="form-group">
                         <label for="desc">Açıklama :</label>
-                        <textarea rows="4" name="desc" class="form-control" id="desc" placeholder="Talep Açıklamasını Girin."></textarea>
+                        <textarea rows="4" name="description" class="form-control" id="description" placeholder="Talep Açıklamasını Girin."></textarea>
                     </div>
   
                     <div class="row">
@@ -167,6 +168,6 @@ else{
 <script>
 var options=
 </script>
-<script type="text/javascript" src="talepler/handle.js"></script>
+<script type="text/javascript" src="kazalar/handle.js"></script>
 <?php }
 ?>
