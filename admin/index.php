@@ -205,6 +205,26 @@ switch($page){
     include 'evraklar/evraklar.php';
     break;
 
+    case 'kazalar';
+    include 'kazalar/kazalar.php';
+    break;
+
+    case 'kazalar';
+    include 'kazalar/kaza-detay.php';
+    break;
+
+    case 'kazalar';
+    include 'kazalar/kaza-duzenle.php';
+    break;
+
+    case 'kazalar';
+    include 'kazalar/kaza-ekle.php';
+    break;
+
+    case 'kazalar';
+    include 'kazalar/kaza-sil.php';
+    break;
+
     default;
     include 'talepler/talepler.php';
     break;
