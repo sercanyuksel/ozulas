@@ -1,5 +1,5 @@
 <?php
-$sth=$conn->prepare("SELECT * from accidents ORDER BY accidents_id ASC");
+$sth=$conn->prepare("SELECT * from accidents ORDER BY accidents_id DESC");
 $sth->execute();
 $accidents=$sth->fetchAll();
 $sth=$conn->prepare("SELECT * from users WHERE type_id=3 OR type_id=1");
@@ -15,7 +15,7 @@ $creators=$sth->fetchAll();
                                 </div>
                                 <div class="card-body">
                                 <div class="col-sm-12">
-                                <label for="creator_filter">Talebi Açana Göre Filtrele :</label>
+                                <label for="creator_filter">Kaza Durumuna Göre Filtrele :</label>
                                 <select id="filter_creator" style="width:150px;">
                                 <option value="-1" disabled selected="selected">Kaza Durumu Seçin</option>
                                 <option value="all">Hepsi</option>
@@ -30,12 +30,14 @@ $creators=$sth->fetchAll();
                                         <thead>
                                             <tr>
                                                 <td>Kaza No</td>
+                                                <td>Kaydı Açan</td>
                                                 <td>Araç Kodu</td>
                                                 <td>Kaza Yapılan Araç</td>
                                                 <td>Kaza Yeri</td>
-                                                <td>Kaza Tarihi</td>
-                                                <td>Talebin Açıldığı Tarih</td>
+                                                <td>Sürücü Adı</td>
+                                                <td>Kaza Tarihi</td>                                               
                                                 <td>Kaza Durumu</td>
+                                                <td>Fotoğraf</td>
                                                 <td>İşlemler</td>
                                             </tr>
                                         </thead>
@@ -67,15 +69,17 @@ $creators=$sth->fetchAll();
                                                 $color="badge-primary";
                                             }
                                             ?>
-                                                 <tr class="<?=$color?>">
+                                                <tr class="<?=$color?>">                                    
                                                 <td><?=$accident_id?></td>
+                                                <td><?=$creator['name']?> <?=$creator['surname']?></td>
                                                 <td><?=$car['code']?></td>
                                                 <td><?=$kaza_arac?></td>
                                                 <td><?=$kaza_yeri?></td>
-                                                <td><?=$creator['name']?> <?=$creator['surname']?></td>
+                                                <td><?=$accident['driver_id']?></td>
                                                 <td><?=$create_date?></td>
                                                 <td><?=$status?></td>
-                                                <td class="text-center"><a href="index.php?islem=kaza-duzenle&id=<?=$accident['accidents_id']?>" title="incele"><i class="icon-magnifier"></i></a>
+                                                <td><a href="../../uploads/<?=$accident['file_name']?>" download>Kaza Fotoğrafı</a></td>
+                                                <td class="text-center">
                                                 <a onclick="return confirmation()" href="index.php?islem=kaza-sil&accidents_id=<?=$accident['accidents_id']?>" title="Sil"><i class="icon-trash"></i></a>
                                                 </td>
                                                 </tr>

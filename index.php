@@ -47,6 +47,9 @@
             header("Refresh:2; url=secreatery");
             break;
 
+            case 7;
+            header("Refresh:2; url=saha");
+            break;
         }
     }
     else
@@ -103,6 +106,10 @@
 
                     case 6;
                     header("Refresh:2; url=secreatery");
+                    break;
+
+                    case 7;
+                    header("Refresh:2; url=saha");
                     break;
 
                 }

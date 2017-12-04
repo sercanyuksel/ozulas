@@ -32,7 +32,7 @@ function myFunction() {
     var input, filter, table, tr, td, i;
     input = document.getElementById("table_filter");
     filter = input.value.toUpperCase();
-    table = document.getElementById("talepler");
+    table = document.getElementById("kazalar");
     tr = table.getElementsByTagName("tr");
     if(filter==""){
         for (i = 1; i < tr.length; i++) {
@@ -61,7 +61,8 @@ function myFunction() {
      
     }
   }
-$( "#filter_creator" ).change(function() {
+$("#filter_creator").change(function() {
+   
     var deger=$("#filter_creator").val();
     var input, filter, table, tr, td, i;
     filter = deger.toUpperCase();

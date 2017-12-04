@@ -3,9 +3,7 @@ $sth=$conn->prepare("SELECT * from cars");
 $sth->execute();
 $cars=$sth->fetchAll();
 
-$sth1=$conn->prepare("SELECT * from drivers");
-$sth1->execute();
-$drivers=$sth1->fetchAll();
+
 if($_POST)
 {
     $dt=new DateTime($_POST['tarih']);
@@ -22,7 +20,7 @@ if($_POST)
     $file_loc = $_FILES['file']['tmp_name'];
     $file_type = $_FILES['file']['type'];
     $file_size = $_FILES['file']['size'];
-    $folder="C:/xampp/uploads/";
+    $folder="C:/xampp/htdocs/uploads/";
 
 
     if(empty($description) || empty($car_id))
@@ -124,14 +122,8 @@ else{
                     </div>
                     <div class="form-group">
                     <div class="form-group">
-                        <label for="company">Araç Kodu:</label>
-                        <select class="form-control" name="driver_id" id="driver_id">
-                        <option value="-1" disabled selected="selected">Şoför Seçin</option>
-                        <?php foreach($drivers as $driver) { ?>
-                            <option value="<?=$driver['id']?>"><?=$driver['name']?><?=$driver['surname']?></option>
-
-                        <?php } ?>                        
-                        </select><br/>
+                    <label for="desc">Sürücü :</label>
+                    <input type="text" name="driver_id"  class="form-control" id="desc" placeholder="Sürücü Adı ve Soyadı Girin."></input>
                     </div>
                         <label for="desc">Tarih :</label>
                         <input style="width:25%" type="date" name="tarih"  class="form-control" id="desc"></input>
