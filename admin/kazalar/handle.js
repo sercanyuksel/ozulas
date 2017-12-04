@@ -71,22 +71,27 @@ $("#filter_creator").change(function() {
   
     // Loop through all table rows, and hide those who don't match the search query
     if(filter!="ALL"){
-        for (i = 1; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[7];
-            if (td) {
-                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-            }
-         } 
+    for (i = 1; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[7];
+      if (td) {
+        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      } 
     }
-}else{
+    }
+    else{
+       
         for (i = 1; i < tr.length; i++) {
             tr[i].style.display="";
         }
-}
+    }
 });
+
+
+
 function confirmation() {
     return confirm('Talep Silinecek!Emin Misiniz?');
   }
