@@ -57,15 +57,15 @@ $creators=$sth->fetchAll();
                                             $sth=$conn->prepare("SELECT * from cars WHERE id=?");
                                             $sth->execute(array($accident['car_id']));
                                             $car=$sth->fetch(PDO::FETCH_ASSOC);
-                                            if($accident['kaza_durumu']=='Yara'){
+                                            if($accident['kaza_durumu']=='Yaralamalı'){
                                                 $status='Yaralamalı';
                                                 $color="badge-success";
                                             }
-                                            if($accident['kaza_durumu']=='Ol'){
+                                            if($accident['kaza_durumu']=='Ölümlü'){
                                                 $status='Ölümlü';
                                                 $color="badge-warning";
                                             }
-                                            if($accident['kaza_durumu']=='Mad'){
+                                            if($accident['kaza_durumu']=='Maddi Hasarlı'){
                                                 $status='Maddi Hasarlı';
                                                 $color="badge-primary";
                                             }
